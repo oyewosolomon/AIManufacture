@@ -1,0 +1,107 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { 
+  Brain, 
+  ActivitySquare, 
+  Factory,
+  Shield, 
+  BarChart, 
+  Settings,
+  LucideIcon // Import LucideIcon type for the icon prop
+} from 'lucide-react';
+
+// Define the props for the FeatureCard component
+interface FeatureCardProps {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  delay: number;
+}
+
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description, delay }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay }}
+      className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+    >
+      <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+        <Icon className="w-6 h-6 text-blue-600" />
+      </div>
+      <h3 className="text-xl font-semibold mb-2 text-gray-900">{title}</h3>
+      <p className="text-gray-600">{description}</p>
+    </motion.div>
+  );
+};
+
+const Features: React.FC = () => {
+  const features = [
+    {
+      icon: Brain,
+      title: "AI-Powered Control",
+      description: "Advanced machine learning algorithms optimize production processes in real-time, adapting to changing conditions."
+    },
+    {
+      icon: ActivitySquare,
+      title: "Real-time Monitoring",
+      description: "Monitor every aspect of your production lines with millisecond precision and instant alerts."
+    },
+    {
+      icon: Factory,
+      title: "Scale with Confidence",
+      description: "Seamlessly manage 1,000+ production lines from a single, intuitive dashboard."
+    },
+    {
+      icon: Shield,
+      title: "Predictive Maintenance",
+      description: "Prevent downtime with AI-driven maintenance predictions and early warning systems."
+    },
+    {
+      icon: BarChart,
+      title: "Advanced Analytics",
+      description: "Deep insights into production efficiency, quality metrics, and resource utilization."
+    },
+    {
+      icon: Settings,
+      title: "Custom Integration",
+      description: "Easily integrate with existing systems and customize workflows to match your needs."
+    }
+  ];
+
+  return (
+    <div className="bg-gray-50 py-24" id='features'>
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold mb-4 text-gray-900">
+            Revolutionize Your Manufacturing
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Our platform combines cutting-edge AI with industrial expertise to 
+            deliver unprecedented control and efficiency.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <FeatureCard 
+              key={index}
+              icon={feature.icon}
+              title={feature.title}
+              description={feature.description}
+              delay={index * 0.1}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Features;
