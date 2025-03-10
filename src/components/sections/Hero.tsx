@@ -5,14 +5,23 @@ import { ChevronDown, Activity, Cpu, BarChart2 } from 'lucide-react';
 const Hero = () => {
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 overflow-hidden">
-      {/* Animated background pattern */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute w-96 h-96 -top-10 -left-10 bg-blue-500 rounded-full blur-3xl" />
-        <div className="absolute w-96 h-96 -bottom-10 -right-10 bg-purple-500 rounded-full blur-3xl" />
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          muted
+          loop
+          className="w-full h-full object-cover"
+        >
+          <source src="/images/hero-vid.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        {/* Dark overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
       {/* Main content */}
-      <div className="relative container mx-auto px-4 pt-20 pb-32">
+      <div className="relative z-10 container mx-auto mt-5 px-4 pt-20 pb-32">
         <div className="flex flex-col items-center text-center">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
@@ -34,12 +43,12 @@ const Hero = () => {
           </motion.p>
 
           {/* Stats section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:w-auto w-full md:grid-cols-3 gap-8 mb-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-white"
+              className="bg-white/10 backdrop-blur-lg w- rounded-xl p-6 text-white"
             >
               <Activity className="w-12 h-12 mb-4 text-blue-400" />
               <h3 className="text-4xl font-bold mb-2">40%</h3>

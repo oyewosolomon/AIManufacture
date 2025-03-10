@@ -16,22 +16,38 @@ interface FeatureCardProps {
   title: string;
   description: string;
   delay: number;
+  image: string; // Add image prop
 }
 
-const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description, delay }) => {
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description, delay, image }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
-      className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+      whileHover={{ scale: 1.05, boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.1)" }}
+      className="bg-white/70 backdrop-blur-lg rounded-xl p-6 shadow-lg hover:shadow-xl transition-all border border-white/20 relative overflow-hidden"
     >
-      <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+      {/* Icon with hover animation */}
+      <motion.div
+        whileHover={{ rotate: 15, scale: 1.1 }}
+        className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4"
+      >
         <Icon className="w-6 h-6 text-blue-600" />
-      </div>
+      </motion.div>
+
       <h3 className="text-xl font-semibold mb-2 text-gray-900">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+      <p className="text-gray-600 mb-4">{description}</p>
+
+      {/* Image with parallax effect */}
+      <motion.img
+        src={image}
+        alt={title}
+        className="w-full h-48 object-cover rounded-lg"
+        whileHover={{ scale: 1.1 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      />
     </motion.div>
   );
 };
@@ -41,37 +57,31 @@ const Features: React.FC = () => {
     {
       icon: Brain,
       title: "AI-Powered Control",
-      description: "Advanced machine learning algorithms optimize production processes in real-time, adapting to changing conditions."
+      description: "Advanced machine learning algorithms optimize production processes in real-time, adapting to changing conditions.",
+      image: "/images/ai-control.jpeg" // Replace with actual image
     },
     {
       icon: ActivitySquare,
       title: "Real-time Monitoring",
-      description: "Monitor every aspect of your production lines with millisecond precision and instant alerts."
+      description: "Monitor every aspect of your production lines with millisecond precision and instant alerts.",
+      image: "/images/real-time.webp" // Replace with actual image
     },
     {
       icon: Factory,
       title: "Scale with Confidence",
-      description: "Seamlessly manage 1,000+ production lines from a single, intuitive dashboard."
+      description: "Seamlessly manage 1,000+ production lines from a single, intuitive dashboard.",
+      image: "/images/Confidence-graphic.webp" // Replace with actual image
     },
     {
       icon: Shield,
       title: "Predictive Maintenance",
-      description: "Prevent downtime with AI-driven maintenance predictions and early warning systems."
-    },
-    {
-      icon: BarChart,
-      title: "Advanced Analytics",
-      description: "Deep insights into production efficiency, quality metrics, and resource utilization."
-    },
-    {
-      icon: Settings,
-      title: "Custom Integration",
-      description: "Easily integrate with existing systems and customize workflows to match your needs."
+      description: "Prevent downtime with AI-driven maintenance predictions and early warning systems.",
+      image: "/images/predictive.jpg" // Replace with actual image
     }
   ];
 
   return (
-    <div className="bg-gray-50 py-24" id='features'>
+    <div className="bg-gradient-to-br from-blue-50 to-purple-50 py-24" id='features'>
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -88,7 +98,7 @@ const Features: React.FC = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {features.map((feature, index) => (
             <FeatureCard 
               key={index}
@@ -96,6 +106,7 @@ const Features: React.FC = () => {
               title={feature.title}
               description={feature.description}
               delay={index * 0.1}
+              image={feature.image}
             />
           ))}
         </div>
