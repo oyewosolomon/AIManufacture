@@ -63,18 +63,7 @@ const Footer = () => {
               increased efficiency, reduced costs, and smarter operations.
             </p>
             <div className="space-y-4">
-              <div className="flex items-center gap-3 text-gray-400">
-                <Mail className="w-5 h-5" />
-                <span>contact@aimanufacture.pro</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-400">
-                <Phone className="w-5 h-5" />
-                <span>+1 (888) 123-4567</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-400">
-                <MapPin className="w-5 h-5" />
-                <span>123 AI Boulevard, Tech City, TC 12345</span>
-              </div>
+            
             </div>
           </div>
 
